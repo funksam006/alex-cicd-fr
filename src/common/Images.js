@@ -1,0 +1,27 @@
+export const Images ={
+    Anywhere : require('../assets/images/Anywhere.png'),
+    Welcome: require('../assets/images/Welcome.png'),
+    logo: require('../assets/images/logo.jpg'),
+    onboarding: require('../assets/images/onboarding.png'),
+    facebook: require('../assets/images/facebook.png'),
+    google: require('../assets/images/google.png'),
+    map: require('../assets/images/map.png'),
+    outStation: require('../assets/images/outStation.png'),
+    auto: require('../assets/images/auto.png'),
+    bike: require('../assets/images/bike.png'),
+    taxi: require('../assets/images/taxi.png'),
+
+    sharingTaxi: require('../assets/images/sharingTaxi.png'),
+    coupon: require('../assets/images/coupon.png'),
+    mayWallet: require('../assets/images/mayWallet.png'),
+    credit: require('../assets/images/credit.png'),
+    debit: require('../assets/images/debit.png'),
+    airtelMoney: require('../assets/images/airtelMoney.png'),
+    tigo: require('../assets/images/tigo.png'),
+    wallet: require('../assets/images/wallet.png'),
+    searching: require('../assets/images/searching.png'),
+    image: require('../assets/images/image.png'),
+    rideCancel: require('../assets/images/rideCancel.png'),
+
+    Congratulation: require('../assets/images/Congratulation.png'),
+}
