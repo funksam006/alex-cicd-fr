@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define properties like test environment or credentials
-        GITHUB_REPO = 'https://github.com/username/repository.git'
+        GITHUB_REPO = 'https://github.com/rohyaditav/alex-user.git'
         TEST_ENV = 'staging'
         TEST_REPORT_DIR = 'target/test-classes'
     }
