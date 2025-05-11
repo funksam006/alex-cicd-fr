@@ -1,31 +1,27 @@
 pipeline {
     agent any
-    environment {
-        NODE_HOME = tool name: 'NodeJS', type: 'NodeJS'
+    tools {
+        nodejs 'nodejs'  // This should match the name of the NodeJS tool you configured in Jenkins Global Tool Configuration
     }
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
         }
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Install dependencies with the legacy-peer-deps flag to avoid peer dependency conflicts
-                    sh '''
-                    npm install --legacy-peer-deps
-                    '''
-                }
+                sh 'npm install'  // This will use the Node.js version configured
             }
         }
-        stage('Deploy to Server') {
+        stage('Build') {
             steps {
-                sshagent(['root']) {
-                    sh '''
-                    ssh root@192.168.43.216 'bash -s'
-                    '''
-                }
+                sh 'npm run build'  // Run your build command
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'  // Run tests
             }
         }
     }
