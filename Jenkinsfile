@@ -10,10 +10,10 @@ pipeline {
             }
         }
         stage('Install Dependencies') {
-            steps {
-                sh 'npm install'  // This will use the Node.js version configured
-            }
-        }
+    steps {
+        sh 'npm install --legacy-peer-deps'
+    }
+}
         stage('Build') {
             steps {
                 sh 'npm run build'  // Run your build command
