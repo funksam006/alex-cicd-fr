@@ -59,4 +59,4 @@ pipeline {
             echo 'Tests failed!'
         }
     }
-}
+}//
