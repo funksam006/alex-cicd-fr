@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the GitHub repository
-                git url: "${env.GITHUB_REPO}", branch: 'main'
+                git url: "${env.GITHUB_REPO}", branch: 'master'
             }
         }
 

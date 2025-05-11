@@ -1,5 +1,5 @@
 {
-  "name": "alexUser",
+  "name": "alexuser",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -73,5 +73,9 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "description": "This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
