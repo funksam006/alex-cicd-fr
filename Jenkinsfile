@@ -15,10 +15,14 @@ pipeline {
     }
 }
         stage('Build') {
-            steps {
-                sh 'npm run build'  // Run your build command
-            }
+    steps {
+        script {
+            // Run the React Native Android build
+            sh 'npm run android'
         }
+    }
+}
+
         stage('Test') {
             steps {
                 sh 'npm test'  // Run tests
