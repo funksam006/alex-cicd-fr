@@ -17,8 +17,10 @@ pipeline {
         stage('Build') {
     steps {
         script {
-            // Run the React Native Android build
-            sh 'npm run android'
+            sh '''
+                cd android
+                ./gradlew assembleDebug
+            '''
         }
     }
 }
