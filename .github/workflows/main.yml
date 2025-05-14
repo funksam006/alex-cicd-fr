@@ -28,7 +28,7 @@ jobs:
       - name: Fix 'compile' to 'implementation' in build.gradle for react-native-geocoder
         run: |
           if [ -f "node_modules/react-native-geocoder/android/build.gradle" ]; then
-            sed -i 's|compile fileTree|implementation fileTree|' node_modules/react-native-geocoder/android/build.gradle
+            sed -i 's|compile|implementation|' node_modules/react-native-geocoder/android/build.gradle
           else
             echo "File node_modules/react-native-geocoder/android/build.gradle not found. Skipping sed command."
           fi
