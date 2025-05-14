@@ -45,8 +45,8 @@ jobs:
           cd android
           ./gradlew assembleDebug
 
-      - name: Upload APK as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: android-debug-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+#      - name: Upload APK as artifact
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: android-debug-apk
+#          path: android/app/build/outputs/apk/debug/app-debug.apk
