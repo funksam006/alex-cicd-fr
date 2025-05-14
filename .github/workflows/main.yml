@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: Install dependencies
+      - name: Install dependencies with legacy peer deps
         run: |
-          npm install
+          npm install --legacy-peer-deps
 
       - name: Fix 'compile' to 'implementation' in build.gradle for react-native-geocoder
         run: |
@@ -37,16 +37,6 @@ jobs:
         run: |
           npm run android  # Or 'npm run ios' depending on your target platform
 
-      - name: Cache npm dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-          
       - name: Run tests
         run: |
           npm test
