@@ -35,7 +35,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-            - name: Patch react-native-geocoder build.gradle
+      - name: Patch react-native-geocoder build.gradle
         run: |
           # Fixing 'compile' to 'implementation' in build.gradle for react-native-geocoder
           sed -i 's|compile fileTree|implementation fileTree|' node_modules/react-native-geocoder/android/build.gradle
