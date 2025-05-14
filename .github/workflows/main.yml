@@ -37,14 +37,13 @@ jobs:
 
       - name: Patch react-native-geocoder build.gradle
         run: |
-          # Fixing 'compile' to 'implementation' in build.gradle for react-native-geocoder
           sed -i 's|compile fileTree|implementation fileTree|' node_modules/react-native-geocoder/android/build.gradle
           sed -i "s|compile 'com.facebook.react:react-native:+'|implementation 'com.facebook.react:react-native:+'|" node_modules/react-native-geocoder/android/build.gradle
 
       - name: Downgrade Reanimated (compatible with RN < 0.75)
         run: |
           npm uninstall react-native-reanimated --legacy-peer-deps
-          npm install react-native-reanimated@2.18.1 --legacy-peer-deps
+          npm install react-native-reanimated@2.17.1 --legacy-peer-deps
 
       - name: Build Android Debug APK
         run: |
