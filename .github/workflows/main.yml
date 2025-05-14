@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # ✅ This enables manual trigger
+  workflow_dispatch:  # Enables manual triggering
 
 jobs:
   build-android:
@@ -16,7 +16,7 @@ jobs:
     env:
       JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
       ANDROID_HOME: /usr/local/lib/android/sdk
-      PATH: ${{ env.ANDROID_HOME }}/emulator:${{ env.ANDROID_HOME }}/tools:${{ env.ANDROID_HOME }}/platform-tools:${{ env.PATH }}
+      PATH: /usr/local/lib/android/sdk/emulator:/usr/local/lib/android/sdk/tools:/usr/local/lib/android/sdk/platform-tools:${{ env.PATH }}
 
     steps:
       - name: Checkout Code
@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'  # Adjust to your project's Node version
+          node-version: '18'  # Adjust if necessary
 
       - name: Install npm dependencies
         run: npm install --legacy-peer-deps
@@ -43,7 +43,8 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: ${{ runner.os }}-gradle
+          restore-keys: |
+            ${{ runner.os }}-gradle
 
       - name: Build Android App
         run: |
