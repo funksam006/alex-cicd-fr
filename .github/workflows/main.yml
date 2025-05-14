@@ -25,10 +25,11 @@ jobs:
         run: |
           npm install --legacy-peer-deps
 
-      - name: Fix 'compile' to 'implementation' in build.gradle for react-native-geocoder
+      - name: Fix 'compile' to 'implementation' and 'implementationSdkVersion' to 'compileSdkVersion' in build.gradle for react-native-geocoder
         run: |
           if [ -f "node_modules/react-native-geocoder/android/build.gradle" ]; then
             sed -i 's|compile|implementation|' node_modules/react-native-geocoder/android/build.gradle
+            sed -i 's|implementationSdkVersion(25)|compileSdkVersion 25|' node_modules/react-native-geocoder/android/build.gradle
           else
             echo "File node_modules/react-native-geocoder/android/build.gradle not found. Skipping sed command."
           fi
