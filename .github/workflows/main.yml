@@ -37,9 +37,8 @@ jobs:
 
       - name: Patch react-native-geocoder build.gradle
         run: |
-          # Fixing 'compile' to 'implementation' in build.gradle for react-native-geocoder
-          sed -i 's|compile fileTree|implementation fileTree|' node_modules/react-native-geocoder/android/build.gradle
-          sed -i "s|compile 'com.facebook.react:react-native:+'|implementation 'com.facebook.react:react-native:+'|" node_modules/react-native-geocoder/android/build.gradle
+          # Replace all 'compile' with 'implementation' in the geocoder build.gradle file
+          sed -i 's/\bcompile\b/implementation/g' node_modules/react-native-geocoder/android/build.gradle
 
       - name: Build Android Debug APK
         run: |
