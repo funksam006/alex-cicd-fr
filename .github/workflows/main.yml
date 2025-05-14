@@ -37,6 +37,7 @@ jobs:
 
       - name: Patch react-native-geocoder build.gradle
         run: |
+          # Fixing 'compile' to 'implementation' in build.gradle for react-native-geocoder
           sed -i 's/compile fileTree/implementation fileTree/' node_modules/react-native-geocoder/android/build.gradle
           sed -i "s/compile 'com.facebook.react:react-native:+/implementation 'com.facebook.react:react-native:+'" node_modules/react-native-geocoder/android/build.gradle
 
@@ -44,9 +45,3 @@ jobs:
         run: |
           cd android
           ./gradlew assembleDebug
-
-#      - name: Upload APK as artifact
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: android-debug-apk
-#          path: android/app/build/outputs/apk/debug/app-debug.apk
