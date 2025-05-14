@@ -13,19 +13,21 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
+        classpath("com.android.tools.build:gradle:7.4.1") // Add the version here
         classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
-        subprojects { subproject ->
-        afterEvaluate{
-            if((subproject.plugins.hasPlugin('android') || subproject.plugins.hasPlugin('android-library'))) {
-                android {
-                    compileSdkVersion rootProject.ext.compileSdkVersion
-                    buildToolsVersion rootProject.ext.buildToolsVersion
-                }
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    }
+}
+
+// Subproject configuration (for applying plugin to subprojects)
+subprojects { subproject ->
+    afterEvaluate {
+        if (subproject.plugins.hasPlugin('android') || subproject.plugins.hasPlugin('android-library')) {
+            subproject.android {
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
             }
         }
-    }
     }
 }
 
