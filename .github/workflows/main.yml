@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Enables manual triggering
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   build-android:
@@ -16,21 +16,21 @@ jobs:
     env:
       JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
       ANDROID_HOME: /usr/local/lib/android/sdk
-      PATH: /usr/local/lib/android/sdk/emulator:/usr/local/lib/android/sdk/tools:/usr/local/lib/android/sdk/platform-tools:${{ env.PATH }}
+      PATH: /usr/local/lib/android/sdk/emulator:/usr/local/lib/android/sdk/tools:/usr/local/lib/android/sdk/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'  # Adjust if necessary
+          node-version: '18'
 
       - name: Install npm dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Set up JDK 11
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -46,10 +46,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle
 
-      - name: Build Android App
+      - name: Build Android app
         run: |
           cd android
           ./gradlew assembleDebug
 
-      - name: Run Tests
+      - name: Run tests
         run: npm test
