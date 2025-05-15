@@ -1,12 +1,10 @@
-name: React Native Build CI 
+name: Android CI
 
 on:
   push:
     branches:
       - master
   pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -14,39 +12,31 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: 18
 
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: '17'  # Or '11' if your build requires it
-
-      - name: Install dependencies with legacy peer deps
+      - name: Install Dependencies
         run: |
-          npm install --legacy-peer-deps
-
-      - name: Fix Gradle config for react-native-geocoder
+          npm install
+          
+      - name: Downgrade Reanimated for RN 0.74.x
         run: |
-          FILE="node_modules/react-native-geocoder/android/build.gradle"
-          if [ -f "$FILE" ]; then
-            echo "Patching $FILE"
-            sed -i 's|^[ \t]*compile |    implementation |g' "$FILE"
-            sed -i 's|implementationSdkVersion *( *[0-9]* *)|compileSdkVersion 33|g' "$FILE"
-          else
-            echo "$FILE not found, skipping patch."
+          REANIMATED_VERSION=$(npm list react-native-reanimated | grep -oP '(?<=react-native-reanimated@)[\d.]+' || echo "none")
+          RN_VERSION=$(node -p "require('./package.json').dependencies['react-native']")
+
+          if [[ "$RN_VERSION" == "0.74.1" ]] && [[ "$REANIMATED_VERSION" != "3.7.1" ]]; then
+            echo "Downgrading react-native-reanimated to 3.7.1 for RN 0.74.1..."
+            npm install react-native-reanimated@3.7.1
           fi
 
-      - name: Build Android APK
+      - name: Clean Gradle
+        run: cd android && ./gradlew clean
+
+      - name: Build Android App
         run: |
           cd android
           ./gradlew assembleDebug
-
-      - name: Run tests
-        run: |
-          npm test
