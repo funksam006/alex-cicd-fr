@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -21,22 +21,31 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'  # Or '11' if your build requires it
+
       - name: Install dependencies with legacy peer deps
         run: |
           npm install --legacy-peer-deps
 
-      - name: Fix 'compile' to 'implementation' and 'implementationSdkVersion' to 'compileSdkVersion' in build.gradle for react-native-geocoder
+      - name: Fix Gradle config for react-native-geocoder
         run: |
-          if [ -f "node_modules/react-native-geocoder/android/build.gradle" ]; then
-            sed -i 's|compile|implementation|' node_modules/react-native-geocoder/android/build.gradle
-            sed -i 's|implementationSdkVersion(25)|compileSdkVersion 25|' node_modules/react-native-geocoder/android/build.gradle
+          FILE="node_modules/react-native-geocoder/android/build.gradle"
+          if [ -f "$FILE" ]; then
+            echo "Patching $FILE"
+            sed -i 's|^[ \t]*compile |    implementation |g' "$FILE"
+            sed -i 's|implementationSdkVersion *( *[0-9]* *)|compileSdkVersion 33|g' "$FILE"
           else
-            echo "File node_modules/react-native-geocoder/android/build.gradle not found. Skipping sed command."
+            echo "$FILE not found, skipping patch."
           fi
 
-      - name: Run build
+      - name: Build Android APK
         run: |
-          npm run android  # Or 'npm run ios' depending on your target platform
+          cd android
+          ./gradlew assembleDebug
 
       - name: Run tests
         run: |
