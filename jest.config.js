@@ -13,6 +13,12 @@ module.exports = {
       '|react-native-gesture-handler' +
       '|react-native-toast-message' +
       '|react-native-splash-screen' +
+      '|react-native-status-bar-height' +
       ')/)',
   ],
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$': '<rootDir>/jest/__mocks__/fileMock.js',
+    '\\.(css|less)$': '<rootDir>/jest/__mocks__/styleMock.js',
+  },
+  testEnvironment: 'jsdom',
 };
