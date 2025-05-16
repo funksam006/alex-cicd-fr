@@ -16,6 +16,7 @@ module.exports = {
       '|react-native-status-bar-height' +
       '|react-native-modal-datetime-picker' +
       '|@react-native-community/datetimepicker' +
+      '|react-native-country-codes-picker' +
       ')/)',
   ],
   moduleNameMapper: {
