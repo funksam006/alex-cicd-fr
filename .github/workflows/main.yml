@@ -27,11 +27,11 @@ jobs:
           rm -rf node_modules
           rm -f package-lock.json
 
-      - name: Install dependencies with legacy peer deps
-        run: npm install --legacy-peer-deps
+      - name: Install dependencies with force
+        run: npm install --force
 
       - name: Install jest-environment-jsdom
-        run: npm install --save-dev jest-environment-jsdom
+        run: npm install --save-dev jest-environment-jsdom --force
 
       - name: Run tests
-        run: npm test
+        run: npm test --force
