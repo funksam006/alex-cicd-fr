@@ -20,5 +20,5 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$': '<rootDir>/jest/__mocks__/fileMock.js',
     '\\.(css|less)$': '<rootDir>/jest/__mocks__/styleMock.js',
   },
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
 };
