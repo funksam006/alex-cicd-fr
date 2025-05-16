@@ -1,18 +1,15 @@
-// jest/setup.js
-
 import 'react-native-gesture-handler/jestSetup';
 
-// Mock gesture-handler dependencies
-jest.mock('react-native-gesture-handler', () => {
-  const View = require('react-native/Libraries/Components/View/View');
-  return {
-    ...jest.requireActual('react-native-gesture-handler'),
-    GestureHandlerRootView: View,
-    Swipeable: View,
-    DrawerLayout: View,
-    State: {},
-    PanGestureHandler: View,
-    TapGestureHandler: View,
-    LongPressGestureHandler: View,
-  };
-});
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
+jest.mock('react-native-splash-screen', () => ({
+  hide: jest.fn(),
+  show: jest.fn(),
+}));
+jest.mock('react-native-status-bar-height', () => ({
+  getStatusBarHeight: jest.fn(() => 20),
+}));
+jest.mock('react-native-toast-message', () => ({
+  show: jest.fn(),
+  hide: jest.fn(),
+}));
