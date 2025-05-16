@@ -5,8 +5,6 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -29,11 +27,8 @@ jobs:
           rm -rf node_modules
           rm -f package-lock.json
 
-      - name: Install dependencies with legacy peer deps
-        run: npm install --legacy-peer-deps
-
-      - name: Install jest-environment-jsdom
-        run: npm install --save-dev jest-environment-jsdom
+      - name: Install dependencies with force
+        run: npm install --force
 
       - name: Run tests
         run: npm test
