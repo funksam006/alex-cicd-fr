@@ -12,6 +12,7 @@ module.exports = {
       '|redux-persist' +
       '|react-native-gesture-handler' +
       '|react-native-toast-message' +
+      '|react-native-splash-screen' +
       ')/)',
   ],
 };
