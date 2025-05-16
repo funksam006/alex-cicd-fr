@@ -30,5 +30,8 @@ jobs:
       - name: Install dependencies with force
         run: npm install --force
 
+      - name: Install jest-environment-jsdom
+        run: npm install --save-dev jest-environment-jsdom
+
       - name: Run tests
         run: npm test
