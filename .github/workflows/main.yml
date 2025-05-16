@@ -34,7 +34,7 @@ jobs:
         run: npm install --save-dev jest-environment-jsdom --force
 
       - name: Install react-native-install-referrer
-        run: npm install react-native-install-referrer
+          run: npm install react-native-install-referrer --legacy-peer-deps
 
       - name: Mock react-native-install-referrer
         run: |
