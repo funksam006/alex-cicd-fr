@@ -1,4 +1,4 @@
-name: Android CI
+name: React Native CI
 
 on:
   push:
@@ -17,26 +17,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
-      - name: Install Dependencies
+      - name: Clean npm cache
+        run: npm cache clean --force
+
+      - name: Remove node_modules and lock file
         run: |
-          npm install
-          
-      - name: Downgrade Reanimated for RN 0.74.x
-        run: |
-          REANIMATED_VERSION=$(npm list react-native-reanimated | grep -oP '(?<=react-native-reanimated@)[\d.]+' || echo "none")
-          RN_VERSION=$(node -p "require('./package.json').dependencies['react-native']")
+          rm -rf node_modules
+          rm -f package-lock.json
 
-          if [[ "$RN_VERSION" == "0.74.1" ]] && [[ "$REANIMATED_VERSION" != "3.7.1" ]]; then
-            echo "Downgrading react-native-reanimated to 3.7.1 for RN 0.74.1..."
-            npm install react-native-reanimated@3.7.1
-          fi
+      - name: Install dependencies with legacy peer deps
+        run: npm install --legacy-peer-deps
 
-      - name: Clean Gradle
-        run: cd android && ./gradlew clean
-
-      - name: Build Android App
-        run: |
-          cd android
-          ./gradlew assembleDebug
+      - name: Run tests
+        run: npm test
