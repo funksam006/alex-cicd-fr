@@ -43,9 +43,5 @@ jobs:
         run: |
           echo "module.exports = { getInstallReferrer: jest.fn().mockResolvedValue({ installReferrer: 'dummy_referrer', referrerTime: 123456789 }) };" > __mocks__/react-native-install-referrer.js
 
-      - name: Update jest config to mock the module
-        run: |
-          echo "moduleNameMapper: { '^react-native-install-referrer$': '<rootDir>/__mocks__/react-native-install-referrer.js' }" >> jest.config.js
-
       - name: Run tests
         run: npm test --force
