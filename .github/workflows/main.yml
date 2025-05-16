@@ -19,12 +19,30 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Clean npm cache and install dependencies
+      - name: Clean npm cache
+        run: npm cache clean --force
+
+      - name: Remove node_modules and lock file
         run: |
-          npm cache clean --force
-          rm -rf node_modules package-lock.json
-          npm install --force
-          npm install --save-dev metro-react-native-babel-preset jest-environment-jsdom --force
+          rm -rf node_modules
+          rm -f package-lock.json
+
+      - name: Install dependencies with force
+        run: npm install --force
+
+      - name: Install jest-environment-jsdom
+        run: npm install --save-dev jest-environment-jsdom --force
+
+      - name: Install react-native-install-referrer
+        run: npm install react-native-install-referrer
+
+      - name: Mock react-native-install-referrer
+        run: |
+          echo "module.exports = { getInstallReferrer: jest.fn().mockResolvedValue({ installReferrer: 'dummy_referrer', referrerTime: 123456789 }) };" > __mocks__/react-native-install-referrer.js
+
+      - name: Update jest config to mock the module
+        run: |
+          echo "moduleNameMapper: { '^react-native-install-referrer$': '<rootDir>/__mocks__/react-native-install-referrer.js' }" >> jest.config.js
 
       - name: Run tests
         run: npm test --force
