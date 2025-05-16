@@ -20,9 +20,9 @@ module.exports = {
       ')/)',
   ],
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$':
-      '<rootDir>/jest/__mocks__/fileMock.js',
-    '\\.(css|less)$': '<rootDir>/jest/__mocks__/styleMock.js',
-  },
+  '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$': '<rootDir>/jest/__mocks__/fileMock.js',
+  '\\.(css|less)$': '<rootDir>/jest/__mocks__/styleMock.js',
+  '^@react-native-async-storage/async-storage$': '<rootDir>/jest/__mocks__/@react-native-async-storage/async-storage.js',
+},
   testEnvironment: 'jest-environment-jsdom',
 };
