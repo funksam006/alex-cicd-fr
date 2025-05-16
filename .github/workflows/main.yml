@@ -16,3 +16,15 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Clean npm cache and install dependencies
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install --force
+          npm install --save-dev metro-react-native-babel-preset jest-environment-jsdom --force
+
+      - name: Run tests
+        run: npm test --force
