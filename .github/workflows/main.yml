@@ -36,6 +36,9 @@ jobs:
       - name: Install react-native-install-referrer with --legacy-peer-deps
         run: npm install react-native-install-referrer --legacy-peer-deps
 
+      - name: Create __mocks__ directory
+        run: mkdir -p __mocks__
+
       - name: Mock react-native-install-referrer
         run: |
           echo "module.exports = { getInstallReferrer: jest.fn().mockResolvedValue({ installReferrer: 'dummy_referrer', referrerTime: 123456789 }) };" > __mocks__/react-native-install-referrer.js
