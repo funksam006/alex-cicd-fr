@@ -7,22 +7,19 @@ module.exports = {
   transformIgnorePatterns: [
     'node_modules/(?!(react-native' +
       '|@react-native' +
-      '|react-redux' +
       '|@react-navigation' +
-      '|redux-persist' +
       '|react-native-gesture-handler' +
       '|react-native-toast-message' +
       '|react-native-splash-screen' +
       '|react-native-status-bar-height' +
       '|react-native-modal-datetime-picker' +
-      '|@react-native-community/datetimepicker' +
       '|react-native-country-codes-picker' +
       ')/)',
   ],
   moduleNameMapper: {
-  '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$': '<rootDir>/jest/__mocks__/fileMock.js',
-  '\\.(css|less)$': '<rootDir>/jest/__mocks__/styleMock.js',
-  '^@react-native-async-storage/async-storage$': '<rootDir>/jest/__mocks__/@react-native-async-storage/async-storage.js',
-},
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$': '<rootDir>/jest/__mocks__/fileMock.js',
+    '\\.(css|less)$': '<rootDir>/jest/__mocks__/styleMock.js',
+    '^@react-native-async-storage/async-storage$': '<rootDir>/jest/__mocks__/@react-native-async-storage/async-storage.js'
+  },
   testEnvironment: 'jest-environment-jsdom',
 };
