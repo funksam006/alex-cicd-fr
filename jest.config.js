@@ -14,6 +14,7 @@ module.exports = {
       '|react-native-toast-message' +
       '|react-native-splash-screen' +
       '|react-native-status-bar-height' +
+      '|react-native-modal-datetime-picker' +  
       ')/)',
   ],
   moduleNameMapper: {
