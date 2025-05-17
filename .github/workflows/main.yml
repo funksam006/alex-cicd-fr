@@ -21,7 +21,9 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: |
+          npm install --legacy-peer-deps
+          npx patch-package
 
       - name: Set up JDK
         uses: actions/setup-java@v3
