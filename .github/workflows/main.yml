@@ -15,10 +15,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'  # Use 'temurin' instead of 'adoptopenjdk'
+          distribution: 'temurin'
           java-version: '17'
 
       - name: Cache Gradle dependencies
@@ -29,8 +37,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-#      - name: Make Gradlew executable
- #       run: chmod +x android/gradlew
+      - name: Clean Gradle cache
+        run: |
+          cd android
+          ./gradlew clean
 
       - name: Build APK
         run: |
