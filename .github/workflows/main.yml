@@ -20,10 +20,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies with Yarn
         run: |
-          npm install --legacy-peer-deps
-          npm install patch-package
+          yarn install --legacy-peer-deps
+          yarn add patch-package
           npx patch-package
 
       - name: Set up JDK
@@ -52,4 +55,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: my-app-apk
-          path: android/app/build/outputs/apk/release/app-rele
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 30
