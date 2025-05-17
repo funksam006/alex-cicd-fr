@@ -43,6 +43,16 @@ jobs:
         run: |
           echo "module.exports = { getInstallReferrer: jest.fn().mockResolvedValue({ installReferrer: 'dummy_referrer', referrerTime: 123456789 }) };" > __mocks__/react-native-install-referrer.js
 
-      # Skipping tests as per the request
-      - name: Skip tests
-        run: echo "Tests are skipped in this CI workflow."
+      # Build APK
+      - name: Build Android Release APK
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleRelease
+
+      # Upload APK as artifact
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
