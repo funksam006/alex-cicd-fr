@@ -55,6 +55,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "patch-package": "^6.4.7",
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
