@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
@@ -37,10 +37,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Clean Gradle cache
-        run: |
-          cd android
-          ./gradlew clean
+      - name: Make Gradlew executable
+        run: chmod +x android/gradlew
 
       - name: Build APK
         run: |
