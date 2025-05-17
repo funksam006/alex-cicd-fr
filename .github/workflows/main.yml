@@ -1,68 +1,40 @@
-name: React Native CI
+name: Android Build and Upload APK
 
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
         with:
-          node-version: '18'
+          java-version: '11'
+          distribution: 'adoptopenjdk'
 
-      # Clean npm cache
-      - name: Clean npm cache
-        run: npm cache clean --force
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-      # Remove node_modules and lock file
-      - name: Remove node_modules and lock file
-        run: |
-          rm -rf node_modules
-          rm -f package-lock.json
+      - name: Build APK
+        run: ./gradlew assembleRelease
 
-      # Install dependencies with force
-      - name: Install dependencies with force
-        run: npm install --force
-
-      # Install jest-environment-jsdom
-      - name: Install jest-environment-jsdom
-        run: npm install --save-dev jest-environment-jsdom --force
-
-      # Install react-native-install-referrer with --legacy-peer-deps
-      - name: Install react-native-install-referrer with --legacy-peer-deps
-        run: npm install react-native-install-referrer --legacy-peer-deps
-
-      # Create __mocks__ directory
-      - name: Create __mocks__ directory
-        run: mkdir -p __mocks__
-
-      # Mock react-native-install-referrer
-      - name: Mock react-native-install-referrer
-        run: |
-          echo "module.exports = { getInstallReferrer: jest.fn().mockResolvedValue({ installReferrer: 'dummy_referrer', referrerTime: 123456789 }) };" > __mocks__/react-native-install-referrer.js
-
-      # Build Android Release APK
-      - name: Build Android Release APK
-        run: |
-          cd android
-          chmod +x ./gradlew
-          ./gradlew assembleRelease
-
-      # Upload APK as artifact
-      - name: Upload APK Artifact
+      - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-release.apk
+          name: my-app-apk
           path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
