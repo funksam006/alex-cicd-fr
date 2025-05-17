@@ -22,6 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          npm install react@18.3.1 react-dom@18.3.1
           npm install react-native-maps@1.21.0
           npm install react@18.2.0 react-dom@18.2.0
           npm install --legacy-peer-deps --force
