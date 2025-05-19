@@ -57,3 +57,4 @@ jobs:
           name: my-app-apk
           path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
+          overwrite: true
