@@ -46,7 +46,7 @@ jobs:
       - name: Make Gradlew executable
         run: chmod +x android/gradlew
 
-      - name: Build APK
+      - name: Clean and Build APK
         run: |
           cd android
           ./gradlew clean
@@ -58,4 +58,3 @@ jobs:
           name: my-app-apk
           path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
-          overwrite: true
