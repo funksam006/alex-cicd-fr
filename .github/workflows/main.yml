@@ -41,7 +41,7 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle- 
+            ${{ runner.os }}-gradle-
 
       - name: Make Gradlew executable
         run: chmod +x android/gradlew
