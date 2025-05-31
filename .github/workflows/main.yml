@@ -43,18 +43,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Make Gradlew executable
-        run: chmod +x android/gradlew
+      #- name: Make Gradlew executable
+      #  run: chmod +x android/gradlew
+      
+      #- name: Clean and Build APK
+       # run: |
+        #  cd android
+        #  ./gradlew clean
+         # ./gradlew assembleRelease
 
-      - name: Clean and Build APK
-        run: |
-          cd android
-          ./gradlew clean
-          ./gradlew assembleRelease
-
-      - name: Upload APK as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-app-apk
-          path: android/app/build/outputs/apk/release/app-release.apk
-          retention-days: 30
+      #- name: Upload APK as artifact
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: my-app-apk
+      #    path: android/app/build/outputs/apk/release/app-release.apk
+       #   retention-days: 30
